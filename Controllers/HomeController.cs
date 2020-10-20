@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RESTFulApi.Protocol;
+using System.Net;
 
 namespace RESTFulApi.Controllers
 {
@@ -88,5 +89,25 @@ namespace RESTFulApi.Controllers
             };
         }
 
+
+
+        /* Define ResponseCode */
+
+        [HttpGet("[action]")]
+        public IActionResult DefineResponseCode_Simple()
+        {
+            Response.StatusCode = 800;
+            return Content($"Define My ResponseCode {Response.StatusCode}");
+        }
+
+        [HttpGet("[action]")]
+        public IActionResult DefineResponseCode_Detail()
+        {
+            return StatusCode((int)HttpStatusCode.InternalServerError, new
+            {
+                Content = $"Define ResponseCode {(int)HttpStatusCode.InternalServerError}",
+                Detail = "more info write down here"
+            });
+        }
     }
 }
